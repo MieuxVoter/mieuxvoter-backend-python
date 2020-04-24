@@ -20,6 +20,7 @@ ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS'].split(',')
 MAX_NUM_GRADES = int(os.environ['MAX_NUM_GRADES'])
 LANGUAGE_AVAILABLE = os.environ['LANGUAGE_AVAILABLE']
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware'
 ]
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'mvapi.urls'
 
@@ -83,6 +84,7 @@ DATABASES = {
     }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -106,14 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
 USE_TZ = True
+USE_I18N = True
+USE_L10N = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -121,19 +119,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-################################################################################
-#                                                                              #
-#                       MAIL SETTINGS                                          #
-#                                                                              #
-################################################################################
+
+###############################################################################
+#                                                                             #
+#                       MAIL SETTINGS                                         #
+#                                                                             #
+###############################################################################
 if os.environ['EMAIL_USE_TLS'] in ("True", "true", "on", "1"):
     EMAIL_USE_TLS = True
 else:
     EMAIL_USE_TLS = False
 
-#Pour test avec compte Gmail
-EMAIL_BACKEND=os.environ['EMAIL_BACKEND']
-EMAIL_HOST_USER=os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT=os.environ['EMAIL_PORT']
-EMAIL_HOST=os.environ['EMAIL_HOST']
+# Pour test avec compte Gmail
+EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST = os.environ['EMAIL_HOST']
