@@ -1,6 +1,15 @@
+# Python
 __pycache__/
 *.swp
 *.mo
 .#*
 .ipynb_checkpoints/
+
+# Configuration
 .env.local
+
+# Integrated Development Environment
+.idea
+
+# Operating System
+.directory
