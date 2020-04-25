@@ -40,8 +40,8 @@ class Election(RandomPrimaryIdModel):
             raise IntegrityError("Election requires a proper title.")
 
         # check that the language is known
-        if self.select_language not in settings.LANGUAGE_AVAILABLE:
-            string_language = ', '.join(settings.LANGUAGE_AVAILABLE)
+        if self.select_language not in settings.LANGUAGES_AVAILABLE:
+            string_language = ', '.join(settings.LANGUAGES_AVAILABLE)
             raise IntegrityError(
                 "Election is only available in %s." % string_language
             )

@@ -18,7 +18,7 @@ DEBUG = os.environ['DJANGO_DEBUG'] == 'on'
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS']
 MAX_NUM_GRADES = int(os.environ['MAX_NUM_GRADES'])
-LANGUAGE_AVAILABLE = os.environ['LANGUAGE_AVAILABLE']
+LANGUAGES_AVAILABLE = os.environ['LANGUAGES_AVAILABLE']
 
 
 # Application definition
