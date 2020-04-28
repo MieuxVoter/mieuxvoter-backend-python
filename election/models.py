@@ -18,7 +18,7 @@ class Election(RandomPrimaryIdModel):
     finish_at = models.IntegerField("End date",default=round(time()+1))
     # Language preference is used for emailing voters
     select_language = models.CharField("Language", max_length=2,default="en")
-    # If true, one can see results only when the election is finished
+    # Restricted results can only be seen once the election is finished
     restrict_results = models.BooleanField(default=False)
 
     # add some constraints before saving the database
