@@ -6,6 +6,7 @@ import math
 
 Grade = int
 
+
 def votes_to_merit_profiles(
         votes: List[List[Grade]],
         grades: List[Grade]

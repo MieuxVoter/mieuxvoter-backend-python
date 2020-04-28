@@ -18,35 +18,39 @@ class Election(RandomPrimaryIdModel):
     finish_at = models.IntegerField("End date",default=round(time()+1))
     # Language preference is used for emailing voters
     select_language = models.CharField("Language", max_length=2,default="en")
-    # If results are restricted, one can see them only when the election is finished
+    # Restricted results can only be seen once the election is finished
     restrict_results = models.BooleanField(default=False)
 
     # add some constraints before saving the database
     def save(self, *args, **kwargs):
         # make sure we don't ask for more grades than allowed in the database
         if self.num_grades is None:
-            raise IntegrityError("Election requires a positive number of grades.")
+            raise IntegrityError(
+                "Election requires a positive number of grades."
+            )
 
         if self.num_grades > settings.MAX_NUM_GRADES or self.num_grades <= 0:
             raise IntegrityError(
-                "Max number of grades is %d. Asked for %d grades"
+                "Max number of grades is %d, yet you asked for %d grades."
                 % (self.num_grades, settings.MAX_NUM_GRADES)
             )
 
         # check that the title is not empty            
         if self.title is None or self.title == "":
-            raise IntegrityError("Election requires a proper title")
+            raise IntegrityError("Election requires a proper title.")
 
         # check that the language is known
-        if not self.select_language in settings.LANGUAGE_AVAILABLE:
-            string_language =  ', '.join(settings.LANGUAGE_AVAILABLE)
-            raise IntegrityError("Election is only available in " + string_language) 
+        if self.select_language not in settings.LANGUAGES_AVAILABLE:
+            string_language = ', '.join(settings.LANGUAGES_AVAILABLE)
+            raise IntegrityError(
+                "Election is only available in %s." % string_language
+            )
 
         return super().save(*args, **kwargs)
 
 
-
 class Vote(models.Model):
+
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     grades_by_candidate = ArrayField(models.SmallIntegerField("Note"))
 
@@ -56,7 +60,7 @@ class Vote(models.Model):
 
         if len(self.grades_by_candidate) != len(self.election.candidates):
             raise IntegrityError(
-                "number of grades (%d) differs from number of candidates (%d)"
+                "Number of grades (%d) differs from number of candidates (%d)."
                 % (len(self.grades_by_candidate), len(self.election.candidates))
             )
 
@@ -64,8 +68,8 @@ class Vote(models.Model):
             for mention in self.grades_by_candidate
         ):
             raise IntegrityError(
-                "grades have to be between 0 and %d"
-                %(self.election.num_grades- 1)
+                "Grades have to be between 0 and %d."
+                % (self.election.num_grades - 1)
             )
 
         return super().save(*args, **kwargs)

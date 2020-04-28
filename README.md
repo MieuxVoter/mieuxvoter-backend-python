@@ -13,6 +13,7 @@ Edit the `.env` with your own settings. A secret key can be generated in Python 
 >>> from django.core.management.utils import get_random_secret_key
 >>> get_random_secret_key()
 ```
+
 Create a `.env.local` with :
 
 ```
@@ -26,7 +27,7 @@ EMAIL_HOST_PASSWORD=gmail account password
 ```
 
 For the gmail account, it is better to create one specially for this.
-In "Manage your google account" / "security" activated the option "Less secure access of applications"
+In "Manage your google account" / "security", activate the option "Less secure access of applications".
 
 
 Then launch the dockers with:
@@ -36,6 +37,7 @@ Then launch the dockers with:
 You certainly want to apply databases migrations with:
 
 `sudo docker/migrate.sh`
+
 
 ## Browse the admin
 
@@ -47,9 +49,11 @@ sudo docker exec -it mvapi_web_1 python ./manage.py createsuperuser
 
 Visit the admin page at [http://localhost:8012/admin/](http://localhost:8012/admin/).
 
+
 ## Run the tests
 
 `sudo docker/test.sh`
+
 
 ## Create databases migrations
 

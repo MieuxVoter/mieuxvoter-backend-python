@@ -42,7 +42,7 @@ def send_mail_invitation(
 
     activate(
         election.select_language
-        if election.select_language in os.environ.get("LANGUAGE_AVAILABLE", [])
+        if election.select_language in os.environ.get("LANGUAGES_AVAILABLE", [])
         else "en"
     )
 

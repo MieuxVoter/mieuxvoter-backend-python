@@ -16,9 +16,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = os.environ['SITE_URL']
 DEBUG = os.environ['DJANGO_DEBUG'] == 'on'
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS'].split(',')
+ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS']
 MAX_NUM_GRADES = int(os.environ['MAX_NUM_GRADES'])
-LANGUAGE_AVAILABLE = os.environ['LANGUAGE_AVAILABLE']
+LANGUAGES_AVAILABLE = os.environ['LANGUAGES_AVAILABLE']
+
 
 # Application definition
 
@@ -32,7 +33,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
-    'election'
+    'behave_django',
+    'election',
 ]
 
 MIDDLEWARE = [
@@ -44,10 +46,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'mvapi.urls'
 
@@ -75,13 +77,16 @@ WSGI_APPLICATION = 'mvapi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
+        # Engine is tied to postgresql because we're using ArrayFields.
+        'ENGINE': "django.db.backends.postgresql",
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASS'),
+    },
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -106,14 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
 USE_TZ = True
+USE_I18N = True
+USE_L10N = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -121,19 +122,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-################################################################################
-#                                                                              #
-#                       MAIL SETTINGS                                          #
-#                                                                              #
-################################################################################
+
+###############################################################################
+#                                                                             #
+#                       MAIL SETTINGS                                         #
+#                                                                             #
+###############################################################################
 if os.environ['EMAIL_USE_TLS'] in ("True", "true", "on", "1"):
     EMAIL_USE_TLS = True
 else:
     EMAIL_USE_TLS = False
 
-#Pour test avec compte Gmail
-EMAIL_BACKEND=os.environ['EMAIL_BACKEND']
-EMAIL_HOST_USER=os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT=os.environ['EMAIL_PORT']
-EMAIL_HOST=os.environ['EMAIL_HOST']
+# Pour test avec compte Gmail
+EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST = os.environ['EMAIL_HOST']
