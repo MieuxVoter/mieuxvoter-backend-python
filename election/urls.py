@@ -9,6 +9,8 @@ urlpatterns = [
     path(r'get/<str:pk>/', ElectionDetailsAPIView.as_view(), name="details"),
     path(r'vote/', VoteAPIView.as_view(), name="vote"),
     path(r'results/<str:pk>/', ResultAPIView.as_view(), name="results"),
+
+    path(r'polls', ElectionCreateAPIView.as_view(), name="create"),
 ]
 
 
