@@ -152,7 +152,6 @@ class VoteAPIView(CreateAPIView):
             token_object.used = True
             token_object.save()
 
-
         # Dealing with potential errors like the number of mentions
         # differs from the number of candidates.
         try:
@@ -164,8 +163,6 @@ class VoteAPIView(CreateAPIView):
             )
         headers = self.get_success_headers(serializer.data)
         return Response(status=status.HTTP_201_CREATED, headers=headers)
-
-
 
 
 class ResultAPIView(APIView):
