@@ -11,7 +11,7 @@ urlpatterns = [
     path(r'results/<str:pk>/', ResultAPIView.as_view(), name="results"),
 
     path(r'polls', ElectionCreateAPIView.as_view(), name="polls_create"),
-    path(r'votes', VoteAPIView.as_view(), name="polls_vote"),
+    path(r'judgments', VoteAPIView.as_view(), name="judgments_post"),
 ]
 
 
