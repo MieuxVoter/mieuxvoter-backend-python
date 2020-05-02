@@ -81,6 +81,7 @@ class VoteSerializer(serializers.ModelSerializer):
             'token',
         )
 
+
 # See https://github.com/MieuxVoter/mvapi/pull/5#discussion_r291891403 for explanations
 class Candidate:
     def __init__(self, name, idx, profile, grade):
