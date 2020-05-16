@@ -4,6 +4,7 @@ __pycache__/
 *.mo
 .#*
 .ipynb_checkpoints/
+.venv
 
 # Configuration
 .env.local

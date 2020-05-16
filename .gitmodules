@@ -1,0 +1,3 @@
+[submodule "tests/acceptance/features/fr_FR"]
+	path = tests/acceptance/features/fr_FR
+	url = https://git.mieuxvoter.fr/MieuxVoter/mvapi-features-fr.git
